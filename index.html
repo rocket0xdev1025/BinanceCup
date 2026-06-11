@@ -64,30 +64,20 @@
     }
 
     .hero-bg {
-      /* Yellow covered football match ground as hero background */
-      background-image: 
-        linear-gradient(90deg, 
-          rgba(11, 14, 17, 0.94) 0%, 
-          rgba(11, 14, 17, 0.82) 28%, 
-          rgba(11, 14, 17, 0.38) 52%, 
-          rgba(11, 14, 17, 0.62) 75%),
-        url('assets/hero-pitch-bg.jpg');
-      background-size: cover, cover;
-      background-position: left center, center 35%;
-      background-repeat: no-repeat, no-repeat;
-      background-attachment: scroll;
+      /* Video background now powers the hero. Kept for overlay hooks. */
+      background: #0B0E11;
     }
 
-    /* Subtle Binance yellow field glow over the match ground */
+    /* Subtle Binance yellow field glow — now applied via explicit overlay div */
     .hero-bg::before {
       content: '';
       position: absolute;
       inset: 0;
       background: 
         linear-gradient(180deg, rgba(240, 185, 11, 0.07) 0%, transparent 35%),
-        radial-gradient(ellipse at 55% 45%, rgba(240, 185, 11, 0.14) 0%, transparent 70%);
+        radial-gradient(ellipse at 55% 45%, rgba(240, 185, 11, 0.12) 0%, transparent 70%);
       pointer-events: none;
-      z-index: 1;
+      z-index: 2;
       mix-blend-mode: screen;
     }
 
@@ -249,6 +239,7 @@
         <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
           <a href="#story" class="nav-link text-white/80 hover:text-white">The Story</a>
           <a href="#tokenomics" class="nav-link text-white/80 hover:text-white">Tokenomics</a>
+          <a href="#gallery" class="nav-link text-white/80 hover:text-white">Gallery</a>
           <a href="#how" class="nav-link text-white/80 hover:text-white">How to Join</a>
         </div>
 
@@ -281,6 +272,7 @@
       <div class="px-6 py-6 flex flex-col gap-y-4 text-sm font-medium">
         <a href="#story" class="py-1 text-white/80 active:text-white">The Story</a>
         <a href="#tokenomics" class="py-1 text-white/80 active:text-white">Tokenomics</a>
+        <a href="#gallery" class="py-1 text-white/80 active:text-white">Gallery</a>
         <a href="#how" class="py-1 text-white/80 active:text-white">How to Join</a>
         <div class="pt-3 flex flex-col gap-3">
           <a href="https://pancakeswap.finance/swap?outputCurrency=0xcomingsoon" 
@@ -299,7 +291,23 @@
   </nav>
 
   <!-- HERO -->
-  <header class="pt-20 min-h-[100dvh] flex items-center hero-bg relative">
+  <header class="pt-20 min-h-[100dvh] flex items-center hero-bg relative overflow-hidden">
+    <!-- Video Background -->
+    <video 
+      class="absolute inset-0 w-full h-full object-cover z-0"
+      autoplay 
+      muted 
+      loop 
+      playsinline
+    >
+      <source src="/back.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Darkening overlay for text readability (replaces old gradient bg) -->
+    <div class="absolute inset-0 z-[1] bg-gradient-to-r from-[#0B0E11]/95 via-[#0B0E11]/75 to-[#0B0E11]/55"></div>
+
+    <!-- Content -->
     <div class="max-w-7xl mx-auto px-6 pt-10 pb-16 relative z-10">
       <div class="grid lg:grid-cols-12 gap-x-8 items-center">
         
@@ -490,6 +498,73 @@
           </div>
         </div>
         <div id="copy-success" class="hidden text-center mt-2 text-[#F0B90B] text-xs font-semibold tracking-widest">COPIED TO CLIPBOARD — GO BUY $幣安盃</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="max-w-7xl mx-auto px-6 py-20">
+    <div class="text-center mb-10">
+      <div class="uppercase tracking-[3px] text-xs font-bold text-[#F0B90B]">FOOTBALL NARRATIVES</div>
+      <h2 class="font-display text-6xl md:text-7xl leading-none font-bold tracking-tighter mt-2">GALLERY</h2>
+      <p class="mt-3 text-white/70 max-w-sm mx-auto">5 football narratives. One immortal story.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      <!-- 1: The Arrival -->
+      <div class="group gallery-item cursor-pointer relative overflow-hidden rounded-3xl border border-white/10 aspect-[16/10] hover:border-[#F0B90B]/50 transition-colors"
+           data-full-src="https://images.unsplash.com/photo-1574629810360-7efbbe195018">
+        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1200&q=80" 
+             alt="Dramatic football player in action - The Arrival" 
+             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-3 left-3 text-[10px] tracking-[2px] font-semibold text-white/90">THE ARRIVAL</div>
+        <!-- Zoom hint -->
+        <div class="absolute top-3 right-3 bg-black/60 text-white text-[9px] px-2 py-px rounded tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">VIEW HD</div>
+      </div>
+
+      <!-- 2: The Battle -->
+      <div class="group gallery-item cursor-pointer relative overflow-hidden rounded-3xl border border-white/10 aspect-[16/10] hover:border-[#F0B90B]/50 transition-colors"
+           data-full-src="https://images.unsplash.com/photo-1517466787929-bc90951d0974">
+        <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=1200&q=80" 
+             alt="Intense football player sprinting - The Battle" 
+             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-3 left-3 text-[10px] tracking-[2px] font-semibold text-white/90">THE BATTLE</div>
+        <div class="absolute top-3 right-3 bg-black/60 text-white text-[9px] px-2 py-px rounded tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">VIEW HD</div>
+      </div>
+
+      <!-- 3: Under the Lights -->
+      <div class="group gallery-item cursor-pointer relative overflow-hidden rounded-3xl border border-white/10 aspect-[16/10] hover:border-[#F0B90B]/50 transition-colors"
+           data-full-src="https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9">
+        <img src="https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=1200&q=80" 
+             alt="Football stadium at night under bright lights" 
+             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-3 left-3 text-[10px] tracking-[2px] font-semibold text-white/90">UNDER THE LIGHTS</div>
+        <div class="absolute top-3 right-3 bg-black/60 text-white text-[9px] px-2 py-px rounded tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">VIEW HD</div>
+      </div>
+
+      <!-- 4: The Roar -->
+      <div class="group gallery-item cursor-pointer relative overflow-hidden rounded-3xl border border-white/10 aspect-[16/10] hover:border-[#F0B90B]/50 transition-colors"
+           data-full-src="https://images.unsplash.com/photo-1522778119026-d647f0596c20">
+        <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=1200&q=80" 
+             alt="Massive football stadium crowd roaring" 
+             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-3 left-3 text-[10px] tracking-[2px] font-semibold text-white/90">THE ROAR</div>
+        <div class="absolute top-3 right-3 bg-black/60 text-white text-[9px] px-2 py-px rounded tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">VIEW HD</div>
+      </div>
+
+      <!-- 5: The Crown (fixed) -->
+      <div class="group gallery-item cursor-pointer relative overflow-hidden rounded-3xl border border-white/10 aspect-[16/10] hover:border-[#F0B90B]/50 transition-colors"
+           data-full-src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55">
+        <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200&q=80" 
+             alt="Dramatic football goal celebration - The Crown" 
+             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-3 left-3 text-[10px] tracking-[2px] font-semibold text-white/90">THE CROWN</div>
+        <div class="absolute top-3 right-3 bg-black/60 text-white text-[9px] px-2 py-px rounded tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">VIEW HD</div>
       </div>
     </div>
   </section>
@@ -704,6 +779,72 @@
       }
     }
 
+    // Gallery Lightbox - click image to view in high resolution
+    let lightboxOpen = false;
+
+    function initGalleryLightbox() {
+      const items = document.querySelectorAll('.gallery-item');
+      const lightbox = document.getElementById('image-lightbox');
+      const lightboxImg = document.getElementById('lightbox-image');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+
+      if (!lightbox || !lightboxImg || items.length === 0) return;
+
+      items.forEach(item => {
+        item.addEventListener('click', () => {
+          const fullSrc = item.getAttribute('data-full-src');
+          const captionEl = item.querySelector('.absolute.bottom-3');
+          const caption = captionEl ? captionEl.textContent.trim() : '';
+          const imgEl = item.querySelector('img');
+          const alt = imgEl ? imgEl.alt : '';
+
+          lightboxImg.src = fullSrc;
+          lightboxImg.alt = alt;
+          lightboxCaption.textContent = caption;
+
+          lightbox.classList.remove('hidden');
+          lightbox.classList.add('flex');
+          lightboxOpen = true;
+          document.body.style.overflow = 'hidden'; // prevent background scroll
+        });
+      });
+    }
+
+    // Close the lightbox (used by modal backdrop and close button)
+    function closeLightbox(e) {
+      const lightbox = document.getElementById('image-lightbox');
+      const lightboxImg = document.getElementById('lightbox-image');
+
+      if (!lightbox) return;
+
+      const isBackdrop = e && e.target && e.target.id === 'image-lightbox';
+      const isCloseButton = e && e.target && e.target.closest && e.target.closest('button');
+
+      // Close when clicking the dark backdrop or the X button
+      if (isBackdrop || isCloseButton || !e) {
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        if (lightboxImg) lightboxImg.src = '';
+        document.body.style.overflow = '';
+        lightboxOpen = false;
+      }
+    }
+
+    // Keyboard support for lightbox
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && lightboxOpen) {
+        const lightbox = document.getElementById('image-lightbox');
+        const lightboxImg = document.getElementById('lightbox-image');
+        if (lightbox) {
+          lightbox.classList.add('hidden');
+          lightbox.classList.remove('flex');
+          if (lightboxImg) lightboxImg.src = '';
+          document.body.style.overflow = '';
+          lightboxOpen = false;
+        }
+      }
+    });
+
     // Boot everything
     function init() {
       initTailwind();
@@ -711,6 +852,7 @@
       initCountdown();
       initSmoothScroll();
       initKeyboard();
+      initGalleryLightbox();
 
       // Easter egg: Konami-ish "SIUUU" on title click
       const logo = document.querySelector('nav .flex.items-center.gap-x-2');
@@ -743,5 +885,27 @@
       init();
     }
   </script>
+
+  <!-- Image Lightbox / High Resolution Viewer -->
+  <div id="image-lightbox" onclick="closeLightbox(event)"
+       class="hidden fixed inset-0 z-[200] bg-black/95 flex items-center justify-center p-4 md:p-8">
+    <div class="relative w-full max-w-[98vw] max-h-[95vh]" onclick="event.stopImmediatePropagation()">
+      <!-- Close button -->
+      <button onclick="closeLightbox(event)"
+              class="absolute -top-4 -right-4 md:-top-5 md:-right-5 w-11 h-11 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#F0B90B] hover:text-[#0B0E11] text-white text-3xl leading-none z-10 transition-all border border-white/20">
+        &times;
+      </button>
+
+      <!-- High resolution image -->
+      <img id="lightbox-image"
+           class="max-w-full max-h-[88vh] mx-auto rounded-2xl shadow-2xl object-contain bg-black/40"
+           alt="">
+
+      <!-- Caption -->
+      <div id="lightbox-caption"
+           class="text-center mt-4 md:mt-5 text-sm tracking-[2.5px] text-white/70 font-medium">
+      </div>
+    </div>
+  </div>
 </body>
 </html>
